@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Andre
+ * @author Andre andre
  */
 @Entity
 @XmlRootElement
