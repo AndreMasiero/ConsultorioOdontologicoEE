@@ -78,7 +78,7 @@ public class Orcamento implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansOrcamento")
     private Collection<Anaminese> anamineseCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oriOrcamento")
-    private Collection<Orcamentoitem> orcamentoitemCollection;
+    private Collection<OrcamentoItem> orcamentoitemCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parOrcamento")
     private Collection<Parcela> parcelaCollection;
 
@@ -178,11 +178,11 @@ public class Orcamento implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orcamentoitem> getOrcamentoitemCollection() {
+    public Collection<OrcamentoItem> getOrcamentoitemCollection() {
         return orcamentoitemCollection;
     }
 
-    public void setOrcamentoitemCollection(Collection<Orcamentoitem> orcamentoitemCollection) {
+    public void setOrcamentoitemCollection(Collection<OrcamentoItem> orcamentoitemCollection) {
         this.orcamentoitemCollection = orcamentoitemCollection;
     }
 

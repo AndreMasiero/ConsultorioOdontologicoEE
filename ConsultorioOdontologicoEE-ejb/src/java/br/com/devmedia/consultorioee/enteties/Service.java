@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.devmedia.consultorioee.enteties;
 
 import java.io.Serializable;
@@ -50,7 +45,7 @@ public class Service implements Serializable {
     @Column(name = "srv_cost", nullable = false, precision = 16, scale = 2)
     private BigDecimal srvCost;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oriService")
-    private Collection<Orcamentoitem> orcamentoitemCollection;
+    private Collection<OrcamentoItem> orcamentoitemCollection;
 
     public Service() {
     }
@@ -90,11 +85,11 @@ public class Service implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Orcamentoitem> getOrcamentoitemCollection() {
+    public Collection<OrcamentoItem> getOrcamentoitemCollection() {
         return orcamentoitemCollection;
     }
 
-    public void setOrcamentoitemCollection(Collection<Orcamentoitem> orcamentoitemCollection) {
+    public void setOrcamentoitemCollection(Collection<OrcamentoItem> orcamentoitemCollection) {
         this.orcamentoitemCollection = orcamentoitemCollection;
     }
 
@@ -122,5 +117,5 @@ public class Service implements Serializable {
     public String toString() {
         return "br.com.devmedia.consultorioee.enteties.Service[ srvId=" + srvId + " ]";
     }
-    
+
 }

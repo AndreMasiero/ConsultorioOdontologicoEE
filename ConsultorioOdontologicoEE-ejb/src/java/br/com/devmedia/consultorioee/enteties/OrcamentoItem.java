@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.com.devmedia.consultorioee.enteties;
 
 import java.io.Serializable;
@@ -30,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Orcamentoitem.findAll", query = "SELECT o FROM Orcamentoitem o")})
-public class Orcamentoitem implements Serializable {
+public class OrcamentoItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,14 +50,14 @@ public class Orcamentoitem implements Serializable {
     @ManyToOne(optional = false)
     private Orcamento oriOrcamento;
 
-    public Orcamentoitem() {
+    public OrcamentoItem() {
     }
 
-    public Orcamentoitem(Integer oriId) {
+    public OrcamentoItem(Integer oriId) {
         this.oriId = oriId;
     }
 
-    public Orcamentoitem(Integer oriId, BigDecimal oriCost) {
+    public OrcamentoItem(Integer oriId, BigDecimal oriCost) {
         this.oriId = oriId;
         this.oriCost = oriCost;
     }
@@ -116,10 +112,10 @@ public class Orcamentoitem implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Orcamentoitem)) {
+        if (!(object instanceof OrcamentoItem)) {
             return false;
         }
-        Orcamentoitem other = (Orcamentoitem) object;
+        OrcamentoItem other = (OrcamentoItem) object;
         if ((this.oriId == null && other.oriId != null) || (this.oriId != null && !this.oriId.equals(other.oriId))) {
             return false;
         }

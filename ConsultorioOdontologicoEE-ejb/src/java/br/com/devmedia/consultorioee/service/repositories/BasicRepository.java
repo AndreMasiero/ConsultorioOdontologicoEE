@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.devmedia.consultorioee.service.repositories;
 
+import java.io.Serializable;
 import javax.persistence.EntityManager;
 import java.util.List;
 import javax.persistence.Query;
@@ -15,29 +11,43 @@ import javax.persistence.Query;
  */
 public abstract class BasicRepository {
     
+    private static final long serialVersionUID = 1L;
+
     private final EntityManager entityManager;
-    public BasicRepository(EntityManager entityManager){
+
+    public BasicRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    protected EntityManager getEntityManager(){
+    protected EntityManager getEntityManager() {
         return getEntityManager();
     }
 
-    /**
-     *
-     * @param <T>
-     * @param classToCast
-     * @param query
-     * @param values
-     * @return
-     */
+    protected <T> T addEntity(Class<T> classToCast, Object entity) {
+        getEntityManager().persist(entity);
+        return (T) entity;
+    }
+
+    protected <T> T getEntity(Class<T> classToCast, Serializable pk) {
+        return getEntityManager().find(classToCast, pk);
+    }
+
+    protected <T> T setEntity(Class<T> classToCast, Object entity) {
+        Object updatedObj = getEntityManager().merge(entity);
+        return (T) updatedObj;
+    }
+    
+    protected void removeEntity(Object entity) {
+        Object updateObj = getEntityManager().merge(entity);
+        getEntityManager().remove(updateObj);
+    }
+
     protected <T> List<T> getPureList(Class<T> classToCast, String query, Object... values) {
         Query qr = createQuery(query, values);
         return qr.getResultList();
     }
-    
-    protected <T> T getPurePojo(Class<T> classToCast, String query, Object... value){
+
+    protected <T> T getPurePojo(Class<T> classToCast, String query, Object... value) {
         Query qr = createQuery(query, value);
         return (T) qr.getSingleResult();
     }

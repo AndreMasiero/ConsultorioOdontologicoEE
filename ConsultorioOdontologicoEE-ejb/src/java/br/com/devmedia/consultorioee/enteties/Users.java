@@ -146,7 +146,7 @@ public class Users implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        //Aviso - este método não funciona no caso dos campos de ID não estão definidas
         if (!(object instanceof Users)) {
             return false;
         }
@@ -161,5 +161,5 @@ public class Users implements Serializable {
     public String toString() {
         return "br.com.devmedia.consultorioee.enteties.Users[ usuId=" + usuId + " ]";
     }
-    
+
 }
