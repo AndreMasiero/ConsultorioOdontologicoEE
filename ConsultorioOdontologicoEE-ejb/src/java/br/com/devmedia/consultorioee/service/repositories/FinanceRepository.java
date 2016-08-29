@@ -32,7 +32,7 @@ public class FinanceRepository extends BasicRepository {
         removeEntity(par);
     }
 
-    public List<Parcela> getParcelas(int idOfParcela) {
+    public List<Parcela> getParcelasOfOrcamento(int idOfParcela) {
         return getPureList(Parcela.class, "select par Parcela par where par.parOrcamento.orcId = ?1", idOfParcela);
     }
 
@@ -42,6 +42,25 @@ public class FinanceRepository extends BasicRepository {
 
     public List<Parcela> getParcelaPagas(int idOfOrcamento) {
         return getPureList(Parcela.class, "select par Parcela par where par.parOrcamento.orcId = ?1 and par.parPago = 2?", idOfOrcamento, Boolean.TRUE);
+    }
+
+    public List<Parcela> getParcelasOfCustomer(int idOfCustomer) {
+        return getPureList(Parcela.class, "select par Parcela par where par.parOrcamento.orcCustomer = ?1", idOfCustomer);
+    }
+
+    public List<Parcela> getparcelasOfCustomerEmAberto(int idOfCustomer) {
+        return getPureList(Parcela.class, "select par from Parcela par where par..parOrcamento.orcCustomer = ?1 and par.parPago = ?2", idOfCustomer, Boolean.FALSE);
+    }
+
+    public List<Parcela> getParcelasOfCustomerPagas(int idOfCustomer) {
+        return getPureList(Parcela.class, "select par from Parcela par where par..parOrcamento.orcCustomer = ?1 and par.parPago = ?2", idOfCustomer, Boolean.TRUE);
+    }
+
+    public Parcela setPagamentoParcela(int idOfParcela) {
+        Parcela par = getParcela(idOfParcela);
+        par.setParPago(true);
+        par = setParcela(par);
+        return par;
     }
 
 }
