@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -76,11 +77,11 @@ public class Orcamento implements Serializable {
     @ManyToOne(optional = false)
     private Customer orcCustomer;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansOrcamento")
-    private Collection<Anaminese> anamineseCollection;
+    private Collection<Anaminese> anamineseCollection = new LinkedList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oriOrcamento")
-    private Collection<OrcamentoItem> orcamentoitemCollection;
+    private Collection<OrcamentoItem> orcamentoitemCollection = new LinkedList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parOrcamento")
-    private Collection<Parcela> parcelaCollection;
+    private Collection<Parcela> parcelaCollection = new LinkedList<>();
 
     public Orcamento() {
     }
@@ -98,6 +99,11 @@ public class Orcamento implements Serializable {
 
     public Integer getOrcId() {
         return orcId;
+    }
+    
+    public void addItem(OrcamentoItem ori){
+        ori.setOriOrcamento(this);
+        orcamentoitemCollection.add(ori);
     }
 
     public void setOrcId(Integer orcId) {
