@@ -9,6 +9,6 @@ package br.com.devmedia.consultorioee.service;
  *
  * @author Andre
  */
-public class BasicService {
+abstract class BasicService implements java.io.Serializable{
     
 }

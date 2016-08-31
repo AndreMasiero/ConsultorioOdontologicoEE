@@ -8,6 +8,7 @@ package br.com.devmedia.consultorioee.enteties;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -112,15 +113,25 @@ public class Customer implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date cusBorndate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcCustomer")
-    private Collection<Orcamento> orcamentoCollection;
+    private Collection<Orcamento> orcamentoCollection = new LinkedList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansCustomer")
-    private Collection<Anaminese> anamineseCollection;
+    private Collection<Anaminese> anamineseCollection = new LinkedList<>();
 
     public Customer() {
     }
 
     public Customer(Integer cusId) {
         this.cusId = cusId;
+    }
+
+    public void addOrcamento(Orcamento orc) {
+        orc.setOrcCustomer(this);
+        getOrcamentoCollection().add(orc);
+    }
+
+    public void addAnaminese(Anaminese anam) {
+        anam.setAnsCustomer(this);
+        getAnamineseCollection().add(anam);
     }
 
     public Customer(Integer cusId, String cusName, int cusAge, String cusAddress, String cusState, String cusCity, String cusFather, String cusMother, Date cusBorndate) {
@@ -321,5 +332,5 @@ public class Customer implements Serializable {
     public String toString() {
         return "br.com.devmedia.consultorioee.enteties.Customer[ cusId=" + cusId + " ]";
     }
-    
+
 }

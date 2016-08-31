@@ -14,6 +14,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -67,7 +69,8 @@ public class Orcamento implements Serializable {
     @NotNull
     @Size(min = 1, max = 9)
     @Column(name = "orc_paymentType", nullable = false, length = 9)
-    private String orcpaymentType;
+    @Enumerated(EnumType.STRING)    
+    private PaymentType orcpaymentType;
     @Column(name = "orc_times")
     private Integer orcTimes;
     @JoinColumn(name = "orc_dentist", referencedColumnName = "usu_id", nullable = false)
@@ -90,7 +93,7 @@ public class Orcamento implements Serializable {
         this.orcId = orcId;
     }
 
-    public Orcamento(Integer orcId, Date orcDate, Date orcHour, String orcpaymentType) {
+    public Orcamento(Integer orcId, Date orcDate, Date orcHour, PaymentType orcpaymentType) {
         this.orcId = orcId;
         this.orcDate = orcDate;
         this.orcHour = orcHour;
@@ -100,10 +103,20 @@ public class Orcamento implements Serializable {
     public Integer getOrcId() {
         return orcId;
     }
-    
-    public void addItem(OrcamentoItem ori){
+
+    public void addItem(OrcamentoItem ori) {
         ori.setOriOrcamento(this);
         orcamentoitemCollection.add(ori);
+    }
+
+    public void addAnaminese(Anaminese anam) {
+        anam.setAnsOrcamento(this);
+        getAnamineseCollection().add(anam);
+    }
+
+    public void addParcela(Parcela par) {
+        par.setParOrcamento(this);
+        getParcelaCollection().add(par);
     }
 
     public void setOrcId(Integer orcId) {
@@ -142,11 +155,11 @@ public class Orcamento implements Serializable {
         this.orcTotal = orcTotal;
     }
 
-    public String getOrcpaymentType() {
+    public PaymentType getOrcPaymentType() {
         return orcpaymentType;
     }
 
-    public void setOrcpaymentType(String orcpaymentType) {
+    public void setOrcpaymentType(PaymentType orcpaymentType) {
         this.orcpaymentType = orcpaymentType;
     }
 
@@ -225,5 +238,5 @@ public class Orcamento implements Serializable {
     public String toString() {
         return "br.com.devmedia.consultorioee.enteties.Orcamento[ orcId=" + orcId + " ]";
     }
-    
+
 }
